@@ -42,6 +42,6 @@ class AssetsInstallTask extends AbstractSymfonyTask
 
     protected function getSymfonyOptions()
     {
-        return ['target' => 'web', 'flags' => '--symlink --relative'];
+        return ['target' => 'public', 'flags' => '--symlink --relative'];
     }
 }

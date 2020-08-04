@@ -41,7 +41,11 @@ class ReleaseTask extends AbstractTask implements ExecuteOnRollbackInterface
         $hostPath = rtrim($this->runtime->getEnvOption('host_path'), '/');
         $releaseId = $this->runtime->getReleaseId();
 
-        $cmdLinkRelease = sprintf('cd %s && ln -snf releases/%s current', $hostPath, $releaseId);
+        $symlink = $this->runtime->getEnvOption('symlink', 'current');
+
+        $public = $this->runtime->getEnvOption('public', '');
+
+        $cmdLinkRelease = sprintf('cd %s && ln -snf releases/%s%s %s', $hostPath, $releaseId, $public, $symlink);
 
         /** @var Process $process */
         $process = $this->runtime->runRemoteCommand($cmdLinkRelease, false, null);
